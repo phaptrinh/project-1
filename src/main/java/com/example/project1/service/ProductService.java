@@ -14,7 +14,6 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public Product saveProduct(Product product) {
-        req -> pro
         return productRepository.save(product);
     }
 
