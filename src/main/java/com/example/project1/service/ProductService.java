@@ -1,6 +1,7 @@
 package com.example.project1.service;
 
 import com.example.project1.entity.Product;
+import com.example.project1.exception.NotFoundException;
 import com.example.project1.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,7 @@ public class ProductService {
     private ProductRepository productRepository;
 
     public Product saveProduct(Product product) {
+        req -> pro
         return productRepository.save(product);
     }
 
@@ -20,8 +22,10 @@ public class ProductService {
         return productRepository.saveAll(products);
     }
 
-    public Product getProductById(int id) {
-        return productRepository.findById(id).orElse(null);
+    public Product getProductById(int id) throws NotFoundException {
+        Product p = productRepository.findById(id).orElse(null);
+        if (p == null) throw new NotFoundException("Không tồn tại");
+        else return p;
     }
 
     public Product getProductByName(String name) {

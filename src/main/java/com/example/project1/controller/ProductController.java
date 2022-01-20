@@ -3,6 +3,7 @@ package com.example.project1.controller;
 import com.example.project1.entity.Product;
 import com.example.project1.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class ProductController {
     private ProductService productService;
 
     @PostMapping("/addProduct")
-    public Product addProduct(@RequestBody Product product) {
+    public Product addProduct(@RequestBody ProductRequest product) {
         return productService.saveProduct(product);
     }
 
@@ -28,7 +29,7 @@ public class ProductController {
     }
 
     @GetMapping("productById/{id}")
-    public Product findProductById(@PathVariable int id) {
+    public Product findProductById(@PathVariable int id) throws ChangeSetPersister.NotFoundException {
         return productService.getProductById(id);
     }
 
